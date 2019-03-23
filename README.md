@@ -44,26 +44,26 @@ So when you run main.py file by using below command
 ```python
 python main.py 
 ```
-You can see the results that will printed on console also you will get a file that it's name is sample_out.txt in root directory of project. 
+You can see the results that will be printed on console also you will get a file that it's name is sample_out.txt in root directory of project. 
 ## Design
-As mentioned in the project specification requirements often change. So we design a highly extendable architecture and 
-we encapsulate different logic of ETL pipeline in different packages and the users can extend or alter every tiny part of 
-system separately So it's rarely possible that a change somewhere in our code propagate this changes somewhere else.
-At the end we have a easy to extend ETL pipeline that can extract data from csv file and transform it and then load it to 
-a file or list in memory and it's really easy to extend it to extract or load for different sources like DB and transform 
+As mentioned in the project specification, requirements often change. So we designed a highly extendable architecture and 
+encapsulated different logic of ETL pipeline in different packages and the users can extend or alter every tiny part of 
+the system separately, So it's rarely possible that a change somewhere in our code propagate this changes somewhere else.
+At the end we have an easy to extend ETL pipeline that can extract data from csv file and transform it then load it to 
+a file or list in memory and it's really easy to extend it, to extract or load for different sources like DB, and transform 
 different formats in a different order.
 
-In this project we have four main module:
+In this project we have four main modules:
 
-* Extractor: Every Extractor class have to implement BaseExtractor class.
+* Extractor: Every Extractor class has to implement BaseExtractor class.
 Here we have used built-in iterator protocol of python so it's compatible with standard python
-syntax 'for each' and we can easily iterate over extracted data.
+syntax 'for each' and we can easily iterate over the extracted data.
 
 * Transformer: Here we have two base classes. One of them is BaseColumnTransformer and the other one is BaseRowTransformer.
 Column transformer classes are responsible for transforming each column data. They are general enough So they can be used 
 for different cases. For example I used StringToIntegerTransformer class for converting both engine-size and weight data.
 Column transformer classes accept an argument called field_name that specifies the name of field that should be found and 
-transformed.Row transformer classes are specifying which column transformers participating in transforming a whole row.They also 
+transformed. Row transformer classes specify which column transformers participating in transforming a whole row. They also 
 specify the order of results in the output of transformation.
 Implementing a new row transformer class is very easy. For example to meet the requirement I had to implement a PricePredictionRowTransformer as below:
 ```python
@@ -100,5 +100,5 @@ for item in result_list:
 ```
 
 ## Implementation
-In designing I try to achieve an extendable architecture and to implementing that design I try to used most pythonic and principal way of implementation.
-For example I used base abstract classes and methods everywhere it was possible. Also I took advantage of Test Driven Development (TDD) and the whole project is completely covered by unit testing.
+In design phase of the project I tried to achieve an extendable architecture and for implementing that design I tried to used most pythonic and principal way of implementation.
+For example I used base abstract classes and methods everywhere it was possible. Also I took advantages of Test Driven Development (TDD) and the whole project is completely covered by unit testing.
